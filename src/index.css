@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: lausanne-light;
+  src: url(/font/Lausanne-300.woff2);
+}
+@font-face {
+  font-family: lausanne-bold;
+  src: url(/font/Lausanne-500.woff2);
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
