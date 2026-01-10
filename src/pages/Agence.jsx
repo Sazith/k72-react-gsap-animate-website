@@ -1,11 +1,62 @@
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/all";
+import { useRef } from "react";
+
 const Agence = () => {
+  const imageDivRef = useRef(null)
+  const imageRef = useRef(null)
+
+    const imageArray = [
+    'https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/Olivier_480x640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/Lawrence_480x640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/HugoJoseph_480x640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/ChantalG_480x640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/MyleneS_480x640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/SophieA_480x640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/Claire_480x640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/Michele_480X640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/MEL_480X640-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/CAMILLE_480X640_2-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/MAXIME_480X640_2-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/MEGGIE_480X640_2-480x640.jpg',
+    'https://k72.ca/uploads/teamMembers/joel_480X640_3-480x640.jpg',
+  ]
+
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  useGSAP(function () {
+    gsap.to(imageDivRef.current,{
+      scrollTrigger:{
+        trigger: imageDivRef.current,
+        // markers: true,
+        start: 'top 18%',
+        end: 'top -70%',
+        // scrub:true,
+        pin: true,
+        onUpdate: function(elem){
+          let imageIndex;
+          if (elem.progress<1) {
+             imageIndex = Math.floor(elem.progress * imageArray.length)
+          }else{
+            imageIndex = imageArray.length - 1;
+          }
+          imageRef.current.src = imageArray[imageIndex]
+          
+        }
+      }
+    })
+  })
   return (
   <div>
       <div className="section1">
-      <div className="absolute overflow-hidden h-[20vw] w-[15vw] rounded-4xl top-40 left-[30vw] bg-red-500">
+      <div ref={imageDivRef} className="absolute overflow-hidden h-[20vw] w-[15vw] rounded-4xl top-40 left-[30vw]">
         <img
+        ref={imageRef}
           className="h-full object-cover w-full"
-          src="https://i0.wp.com/centmagazine.co.uk/wp-content/uploads/2023/03/The-Coat-Of-A-Gentleman-man-taking-of-his-hat.jpg?ssl=1"
+          src="https://k72.ca/uploads/teamMembers/Carl_480x640-480x640.jpg"
           alt=""
           srcset=""
         />
